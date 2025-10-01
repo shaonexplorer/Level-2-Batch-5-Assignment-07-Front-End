@@ -1,7 +1,25 @@
 import { loginACtion } from "@/actions/login";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const authOptions = {
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+  interface user {
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  }
+}
+
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -28,4 +46,16 @@ export const authOptions = {
   ],
   pages: { signIn: "/login" },
   secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user?.id;
+      }
+      return token;
+    },
+    async session({ token, session }) {
+      session.user.id = token.id as string;
+      return session;
+    },
+  },
 };
