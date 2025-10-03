@@ -77,7 +77,7 @@ export function LoginForm({
                 </div>
                 <Input id="password" name="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full text-foreground">
                 Login
               </Button>
               <Button variant="outline" className="w-full">

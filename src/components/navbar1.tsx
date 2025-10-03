@@ -28,6 +28,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/helpers/authOptions";
 import LogoutButton from "./modules/auth/LogOut";
+import { ModeToggle } from "./modules/theme/mode-toggle";
 
 interface MenuItem {
   title: string;
@@ -35,6 +36,7 @@ interface MenuItem {
   description?: string;
   icon?: React.ReactNode;
   items?: MenuItem[];
+  isPublic: boolean;
 }
 
 interface Navbar1Props {
@@ -65,14 +67,21 @@ const Navbar1 = async ({
     title: "Shadcnblocks.com",
   },
   menu = [
-    { title: "Home", url: "#" },
+    { title: "Home", url: "#", isPublic: true },
     {
       title: "Pricing",
       url: "#",
+      isPublic: true,
     },
     {
       title: "Blog",
       url: "#",
+      isPublic: true,
+    },
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      isPublic: false,
     },
   ],
   auth = {
@@ -104,17 +113,20 @@ const Navbar1 = async ({
             <div className="flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {menu.map((item) => renderMenuItem(item))}
+                  {menu.map((item) => item.isPublic && renderMenuItem(item))}
+                  {session &&
+                    menu.map((item) => !item.isPublic && renderMenuItem(item))}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             {/* <Button asChild variant="outline" size="sm">
               <a href={auth.login.url}>{auth.login.title}</a>
             </Button> */}
+            <ModeToggle />
             {!session && (
-              <Button asChild size="sm">
+              <Button asChild size="sm" className="text-foreground">
                 <Link href={auth.login.url}>{auth.login.title}</Link>
               </Button>
             )}
@@ -125,7 +137,7 @@ const Navbar1 = async ({
 
         {/* Mobile Menu */}
         <div className="block lg:hidden">
-          <div className="flex items-center justify-between">
+          <div className="flex gap-3 items-center justify-between">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
               <Image
@@ -136,6 +148,10 @@ const Navbar1 = async ({
                 alt={logo.alt}
               />
             </a>
+            <div className="ml-auto">
+              <ModeToggle />
+            </div>
+
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -169,8 +185,9 @@ const Navbar1 = async ({
                     {/* <Button asChild variant="outline">
                       <a href={auth.login.url}>{auth.login.title}</a>
                     </Button> */}
+
                     {!session && (
-                      <Button asChild size="sm">
+                      <Button asChild size="sm" className="text-foreground">
                         <Link href={auth.login.url}>{auth.login.title}</Link>
                       </Button>
                     )}

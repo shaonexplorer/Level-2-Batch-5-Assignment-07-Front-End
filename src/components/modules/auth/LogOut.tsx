@@ -10,6 +10,7 @@ function LogoutButton() {
         signOut();
       }}
       size="sm"
+      className="text-foreground"
     >
       Logout
     </Button>
