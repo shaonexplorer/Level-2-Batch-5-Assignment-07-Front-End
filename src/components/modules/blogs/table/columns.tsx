@@ -1,5 +1,17 @@
 "use client";
 
+import { deletePost } from "@/actions/deletePost";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,6 +26,7 @@ import Link from "next/link";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Posts = {
+  id: number;
   title: string;
   content: string;
   image: string;
@@ -41,7 +54,7 @@ export const columns: ColumnDef<Posts>[] = [
     cell: ({ row }) => {
       const content = row.getValue("content") as string;
       return (
-        <div className="w-[400px]">
+        <div className="max-w-[400px]">
           <p className=" truncate overflow-hidden whitespace-nowrap">
             {content}
           </p>
@@ -54,7 +67,7 @@ export const columns: ColumnDef<Posts>[] = [
     header: "Image",
   },
   {
-    accessorKey: "author",
+    accessorKey: "author.firstName",
     header: "Author",
   },
   {
@@ -62,23 +75,48 @@ export const columns: ColumnDef<Posts>[] = [
     cell: ({ row }) => {
       const post = row.original;
 
+      const handleCancel = async () => {
+        const res = await deletePost(post.id);
+        console.log(res);
+      };
+
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>
-              <Link href={`/dashboard/blogs/update?title=${post.title}`}>
-                Update Post
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>Delete Post</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <AlertDialog>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>
+                <Link href={`/dashboard/blogs/update/${post.id}`}>
+                  Update Post
+                </Link>
+              </DropdownMenuItem>
+              <AlertDialogTrigger asChild>
+                <DropdownMenuItem>Delete Post</DropdownMenuItem>
+              </AlertDialogTrigger>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently cancel your
+                parcel and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleCancel}>
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       );
     },
   },

@@ -1,0 +1,26 @@
+"use server";
+
+export const createBlog = async (payload: {
+  title: string;
+  content: string;
+  authorId: number;
+  slug: string;
+}) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+    const post = await response.json();
+
+    console.log(post);
+
+    return post.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

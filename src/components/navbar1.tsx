@@ -75,7 +75,7 @@ const Navbar1 = async ({
     },
     {
       title: "Blog",
-      url: "#",
+      url: "/blogs",
       isPublic: true,
     },
     {

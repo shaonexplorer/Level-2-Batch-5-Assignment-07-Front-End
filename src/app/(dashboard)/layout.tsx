@@ -11,6 +11,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../(public)/globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ModeToggle } from "@/components/modules/theme/mode-toggle";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function DashboardLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
+        <Toaster position="top-center" richColors />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
