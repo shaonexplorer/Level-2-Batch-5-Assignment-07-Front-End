@@ -2,19 +2,28 @@
 
 import { revalidateTag } from "next/cache";
 
-export const createBlog = async (payload: {
+interface IPayload {
   title: string;
   content: string;
-  authorId: number;
+  authorId: string;
   slug: string;
-}) => {
+  image: File;
+}
+
+export const createBlog = async (payload: IPayload) => {
   try {
+    const formData = new FormData();
+
+    Object.keys(payload).forEach((key) => {
+      const typedKey = key as keyof IPayload;
+      formData.append(typedKey, payload[typedKey]);
+    });
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: formData,
       }
     );
     const post = await response.json();
@@ -26,5 +35,6 @@ export const createBlog = async (payload: {
     return post.data;
   } catch (error) {
     console.log(error);
+    return error;
   }
 };

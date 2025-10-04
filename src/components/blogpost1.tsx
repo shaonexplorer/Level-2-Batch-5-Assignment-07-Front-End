@@ -8,7 +8,7 @@ import Image from "next/image";
 const defaultPost = {
   title: "Designing websites faster with shadcn/ui",
   author: { firstName: "John Doe" },
-  image:
+  imageUrl:
     "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg",
   createdAt: new Date(),
   content:
@@ -20,14 +20,14 @@ const defaultPost = {
 interface BlogPostData {
   title: string;
   author: { firstName: string };
-  image: string;
+  imageUrl: string;
   createdAt: Date;
   content: string;
   authorImage?: string;
 }
 
 const Blogpost1 = ({ post = defaultPost }: { post?: BlogPostData }) => {
-  const { title, author, image, createdAt, content, authorImage } = post;
+  const { title, author, imageUrl, createdAt, content, authorImage } = post;
   return (
     <section className="py-32">
       <div className="container">
@@ -53,7 +53,7 @@ const Blogpost1 = ({ post = defaultPost }: { post?: BlogPostData }) => {
             </span>
           </div>
           <Image
-            src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg"
+            src={imageUrl}
             alt="placeholder"
             width={1022}
             height={574}
@@ -123,7 +123,10 @@ const Blogpost1 = ({ post = defaultPost }: { post?: BlogPostData }) => {
           <h2>The King&apos;s Plan</h2>
 
           <Image
-            src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg"
+            src={
+              imageUrl ||
+              "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg"
+            }
             alt="placeholder"
             width={768}
             height={432}

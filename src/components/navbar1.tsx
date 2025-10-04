@@ -61,10 +61,10 @@ interface Navbar1Props {
 
 const Navbar1 = async ({
   logo = {
-    url: "https://www.shadcnblocks.com",
+    url: "/",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
-    title: "Shadcnblocks.com",
+    title: "Abir Hasan Khan",
   },
   menu = [
     { title: "Home", url: "#", isPublic: true },

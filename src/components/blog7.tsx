@@ -19,7 +19,7 @@ interface Post {
   author?: string;
   published?: string;
   url?: string;
-  image: string;
+  imageUrl: string;
 }
 
 interface Blog7Props {
@@ -73,7 +73,10 @@ const Blog7 = async ({
                   className="transition-opacity duration-200 fade-in hover:opacity-70 "
                 >
                   <Image
-                    src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg"
+                    src={
+                      post.imageUrl ||
+                      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg"
+                    }
                     alt={post.title}
                     width={400}
                     height={225}

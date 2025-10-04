@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio App | Abir Hasan Khan",
+  title: "Dashboard | Portfolio App",
   description: "This is my portfolio app built with Next.js and Tailwind CSS.",
 };
 

@@ -5,4 +5,5 @@ export const createBlogSchema = z.object({
   content: z
     .string()
     .min(10, "Content is required and must be 10 characters long"),
+  image: z.string("Image is required"),
 });

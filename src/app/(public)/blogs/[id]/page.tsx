@@ -8,6 +8,24 @@ export const generateStaticParams = async () => {
   });
 };
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post/${id}`
+  );
+  const post = await res.json();
+
+  return {
+    title: post.data.title,
+    description: post.data.content,
+  };
+};
+
 async function BlogDetailsPage({
   params,
 }: {
