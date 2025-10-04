@@ -22,6 +22,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
+import { format } from "date-fns";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -31,6 +32,7 @@ export type Posts = {
   content: string;
   image: string;
   author: string;
+  createdAt: Date;
 };
 
 export const columns: ColumnDef<Posts>[] = [
@@ -47,6 +49,10 @@ export const columns: ColumnDef<Posts>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const content = row.getValue("title") as string;
+      return <div className="min-w-[250px]">{content}</div>;
+    },
   },
   {
     accessorKey: "content",
@@ -54,18 +60,24 @@ export const columns: ColumnDef<Posts>[] = [
     cell: ({ row }) => {
       const content = row.getValue("content") as string;
       return (
-        <div className="max-w-[400px]">
-          <p className=" truncate overflow-hidden whitespace-nowrap">
-            {content}
-          </p>
+        <div className=" ">
+          <p className=" line-clamp-1">{content}</p>
         </div>
       );
     },
   },
   {
-    accessorKey: "image",
-    header: "Image",
+    accessorKey: "createdAt",
+    header: "Date Published",
+    cell: ({ row }) => {
+      const content = row.getValue("createdAt") as string;
+      return <p className="min-w-[100px]">{format(content, "MMMM d, yyyy")}</p>;
+    },
   },
+  // {
+  //   accessorKey: "image",
+  //   header: "Image",
+  // },
   {
     accessorKey: "author.firstName",
     header: "Author",

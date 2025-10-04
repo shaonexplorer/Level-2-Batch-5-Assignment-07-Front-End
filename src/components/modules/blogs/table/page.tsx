@@ -2,7 +2,10 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 
 export default async function BlogTablePage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post`,
+    { cache: "no-store" }
+  );
 
   const data = await res.json();
 

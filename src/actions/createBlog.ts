@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
+
 export const createBlog = async (payload: {
   title: string;
   content: string;
@@ -18,6 +20,8 @@ export const createBlog = async (payload: {
     const post = await response.json();
 
     console.log(post);
+
+    revalidateTag("POST");
 
     return post.data;
   } catch (error) {

@@ -9,6 +9,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Post {
   id: string;
@@ -35,7 +36,10 @@ const Blog7 = async ({
   heading = "Blog Posts",
   description = "Discover the latest trends, tips, and best practices in modern web development. From UI components to design systems, stay updated with our expert insights.",
 }: Blog7Props) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post`,
+    { next: { tags: ["POST"] } }
+  );
   const posts = await res.json();
   return (
     <section className="py-32">
@@ -64,9 +68,8 @@ const Blog7 = async ({
               className="grid grid-rows-[auto_auto_1fr_auto] pt-0 overflow-hidden"
             >
               <div className="aspect-16/9 w-full">
-                <a
-                  href={post.url}
-                  target="_blank"
+                <Link
+                  href={`/blogs/${post.id}`}
                   className="transition-opacity duration-200 fade-in hover:opacity-70 "
                 >
                   <Image
@@ -76,13 +79,11 @@ const Blog7 = async ({
                     height={225}
                     className="h-full w-full object-cover object-center"
                   />
-                </a>
+                </Link>
               </div>
               <CardHeader>
                 <h3 className="text-lg font-semibold hover:underline md:text-xl line-clamp-2">
-                  <a href={post.url} target="_blank">
-                    {post.title}
-                  </a>
+                  <Link href={`/blogs/${post.id}`}>{post.title}</Link>
                 </h3>
               </CardHeader>
               <CardContent className=" ">
@@ -91,14 +92,13 @@ const Blog7 = async ({
                 </p>
               </CardContent>
               <CardFooter>
-                <a
-                  href={post.url}
-                  target="_blank"
+                <Link
+                  href={`/blogs/${post.id}`}
                   className="flex items-center text-foreground hover:underline"
                 >
                   Read more
                   <ArrowRight className="ml-2 size-4" />
-                </a>
+                </Link>
               </CardFooter>
             </Card>
           ))}
