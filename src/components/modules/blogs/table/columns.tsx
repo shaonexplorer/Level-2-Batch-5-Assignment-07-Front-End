@@ -23,6 +23,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -90,6 +91,12 @@ export const columns: ColumnDef<Posts>[] = [
       const handleCancel = async () => {
         const res = await deletePost(post.id);
         console.log(res);
+        if (res.success) {
+          toast.success("Post Deleted Successfully");
+        }
+        if (!res.success) {
+          toast.error("Something Went Wrong");
+        }
       };
 
       return (

@@ -67,10 +67,20 @@ const Navbar1 = async ({
     title: "Abir Hasan Khan",
   },
   menu = [
-    { title: "Home", url: "#", isPublic: true },
+    // { title: "Home", url: "#", isPublic: true },
     {
-      title: "Pricing",
-      url: "#",
+      title: "About Me",
+      url: "/about",
+      isPublic: true,
+    },
+    {
+      title: "Projects",
+      url: "/projects",
+      isPublic: true,
+    },
+    {
+      title: "Contact",
+      url: "/contact",
       isPublic: true,
     },
     {
@@ -106,9 +116,9 @@ const Navbar1 = async ({
                 className="max-h-8 dark:invert"
                 alt={logo.alt}
               />
-              <span className="text-lg font-semibold tracking-tighter">
+              {/* <span className="text-lg font-semibold tracking-tighter">
                 {logo.title}
-              </span>
+              </span> */}
             </a>
             <div className="flex items-center">
               <NavigationMenu>

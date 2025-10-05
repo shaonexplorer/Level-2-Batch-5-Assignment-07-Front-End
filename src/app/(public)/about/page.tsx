@@ -1,7 +1,7 @@
 import About from "@/components/modules/about/about";
 import Hero from "@/components/modules/about/hero";
 
-export default function Home() {
+function AboutPage() {
   return (
     <div className="container mx-auto flex flex-col">
       <Hero />
@@ -9,3 +9,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default AboutPage;

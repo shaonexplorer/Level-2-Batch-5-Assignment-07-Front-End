@@ -7,7 +7,7 @@ function LoginPage() {
     url: "https://www.shadcnblocks.com",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
-    title: "Shadcnblocks.com",
+    title: "Abir Hasan Khan | Portfolio",
   };
   return (
     <div className="flex flex-col min-h-svh w-full items-center justify-center p-6 md:p-10">
