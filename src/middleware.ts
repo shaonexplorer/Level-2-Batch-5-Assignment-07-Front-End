@@ -8,7 +8,9 @@ const authRoutes = ["/login"];
 
 export function middleware(request: NextRequest) {
   // 2. Check for an authentication token (e.g., in a cookie)
-  const isAuthenticated = request.cookies.has("next-auth.session-token");
+  const isAuthenticated =
+    request.cookies.has("next-auth.session-token") ||
+    request.cookies.has("__Secure-next-auth.session-token");
   const pathname = request.nextUrl.pathname;
 
   // 3. Logic for protecting routes
