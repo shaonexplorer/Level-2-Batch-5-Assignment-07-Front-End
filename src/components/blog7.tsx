@@ -40,6 +40,7 @@ const Blog7 = async ({
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post`,
     { next: { tags: ["POST"] } }
   );
+
   const posts = await res.json();
   return (
     <section className="py-32">
@@ -54,12 +55,6 @@ const Blog7 = async ({
           <p className="mb-8 text-muted-foreground md:text-base lg:max-w-2xl lg:text-lg">
             {description}
           </p>
-          {/* <Button variant="link" className="w-full sm:w-auto" asChild>
-            <a href={buttonUrl} target="_blank">
-              {buttonText}
-              <ArrowRight className="ml-2 size-4" />
-            </a>
-          </Button> */}
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {posts.data.slice(0, 6).map((post: Post) => (

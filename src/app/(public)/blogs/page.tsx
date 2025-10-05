@@ -8,11 +8,7 @@ export const metadata: Metadata = {
 };
 
 function BlogPage() {
-  return (
-    <div>
-      <Blog7 />
-    </div>
-  );
+  return <Blog7 />;
 }
 
 export default BlogPage;
