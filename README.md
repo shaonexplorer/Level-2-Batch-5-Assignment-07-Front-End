@@ -14,6 +14,13 @@ pnpm dev
 bun dev
 ```
 
+## ENV Configuration 
+
+  create a .env.local file in the root directory and insert values for following:
+
+    NEXT_PUBLIC_AUTH_SECRET= your auth secret
+    NEXT_PUBLIC_BACKEND_URL= your public/local backend url
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
