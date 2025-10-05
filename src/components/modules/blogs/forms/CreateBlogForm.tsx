@@ -20,8 +20,12 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ImageUploader from "@/components/comp-545";
 import { useFileUpload } from "@/hooks/use-file-upload";
+import { useSession } from "next-auth/react";
 
 function CreateBlogForm() {
+  const { data: session } = useSession();
+  console.log(session);
+
   const router = useRouter();
   const maxSizeMB = 2;
   const maxSize = maxSizeMB * 1024 * 1024; // 2MB default
@@ -58,7 +62,7 @@ function CreateBlogForm() {
     const slug = `${values.title.toLowerCase()}-blog`;
     const post = await createBlog({
       ...values,
-      authorId: "7",
+      authorId: session?.user.id as string,
       slug,
       image: files[0].file as File,
     });
