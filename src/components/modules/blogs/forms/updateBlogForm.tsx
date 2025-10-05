@@ -35,10 +35,11 @@ function UpdateBlogForm({
   });
 
   async function onSubmit(values: z.infer<typeof createBlogSchema>) {
+    console.log("*** from update form ***", values);
     const slug = `${values.title.toLowerCase()}-blog`;
     const post = await updateBlog({
       ...values,
-      authorId: 7,
+      authorId: 1,
       slug,
       id: postData.id,
     });

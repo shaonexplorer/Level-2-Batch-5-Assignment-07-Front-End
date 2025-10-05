@@ -24,7 +24,6 @@ import { useSession } from "next-auth/react";
 
 function CreateBlogForm() {
   const { data: session } = useSession();
-  console.log(session);
 
   const router = useRouter();
   const maxSizeMB = 2;
