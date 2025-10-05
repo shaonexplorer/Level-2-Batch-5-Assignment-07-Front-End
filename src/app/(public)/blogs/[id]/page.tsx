@@ -11,9 +11,9 @@ export const generateStaticParams = async () => {
 export const generateMetadata = async ({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) => {
-  const { id } = await params;
+  const { id } = params;
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post/${id}`
@@ -26,12 +26,8 @@ export const generateMetadata = async ({
   };
 };
 
-async function BlogDetailsPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+async function BlogDetailsPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post/${id}`
   );

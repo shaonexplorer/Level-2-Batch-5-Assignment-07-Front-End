@@ -1,7 +1,7 @@
 import UpdateBlogForm from "@/components/modules/blogs/forms/updateBlogForm";
 
-async function UpdateBlogPage({ params }: { params: { id: string } }) {
-  const id = params.id;
+async function UpdateBlogPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post/${id}`
   );
