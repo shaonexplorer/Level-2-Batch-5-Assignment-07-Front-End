@@ -3,7 +3,7 @@ import { Blogpost1 } from "@/components/blogpost1";
 export const generateStaticParams = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/post`,
-    { cache: "no-store" }
+    { next: { tags: ["POST"] } }
   );
   const posts = await res.json();
   return posts.data.map((post: { id: number }) => {
