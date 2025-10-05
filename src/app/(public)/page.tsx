@@ -3,7 +3,7 @@ import Hero from "@/components/modules/about/hero";
 
 export default function Home() {
   return (
-    <div className="container mx-auto flex flex-col">
+    <div className="   flex flex-col">
       <Hero />
       <About />
     </div>

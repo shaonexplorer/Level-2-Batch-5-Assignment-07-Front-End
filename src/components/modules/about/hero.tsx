@@ -4,7 +4,7 @@ function Hero() {
   return (
     <div
       id="hero"
-      className="bg-[url(/src/assets/herobg.png)] bg-cover bg-center bg-no-repeat w-screen sm:w-full h-screen   py-[25px] flex flex-col items-center justify-center gap-[20px]"
+      className="bg-[url(/herobg.png)] bg-cover bg-center bg-no-repeat w-screen sm:w-full h-screen   py-[25px] flex flex-col items-center justify-center gap-[20px]"
     >
       <h1 className="text-[40px] sm:text-[80px] text-white font-bold  ">
         Hi, I am <span className="text-primary">Abir</span>

@@ -4,7 +4,7 @@ import Skills from "./skills";
 
 function About() {
   return (
-    <div className="container sm:w-full " id="about">
+    <div className="container mx-auto sm:w-full " id="about">
       <div className=" container sm:w-[1440px] mx-auto py-[85px] flex flex-col items-center justify-center gap-[20px]">
         <h1 className="text-[36px] text-white font-bold ">About</h1>
         <span className="w-[263px] h-[1px] bg-white"></span>
