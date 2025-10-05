@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export const deletePost = async (id: number) => {
   try {
@@ -10,6 +10,7 @@ export const deletePost = async (id: number) => {
     );
 
     const data = await res.json();
+    revalidateTag("POST");
     revalidatePath("dashboard/blogs");
     return data;
   } catch (error) {
